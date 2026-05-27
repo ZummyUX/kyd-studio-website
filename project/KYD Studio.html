@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>KYD Studio — מרעיון לקונספט</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Heebo:wght@300;400;500;600;700&family=Assistant:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="image-slot.js"></script>
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-2: #f7f3ea;
+    --card: #faf6ec;
+    --card-2: #ffffff;
+    --ink: #2a2620;
+    --ink-2: #5b554b;
+    --ink-3: #8a8377;
+    --line: #d9cfb9;
+    --line-2: #e5dcc6;
+    --accent: #a78256;
+    --accent-2: #8d6a42;
+    --accent-soft: #d8c5a3;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Assistant', 'Heebo', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+
+  /* ===== NAV ===== */
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 0 18px;
+  }
+  .nav-left { display: flex; align-items: center; gap: 28px; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 22px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all .2s ease;
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+  .btn-primary:hover { background: var(--accent-2); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--line);
+  }
+  .btn-ghost:hover { background: rgba(0,0,0,.03); }
+  .btn .arrow { font-size: 14px; }
+
+  .menu { display: flex; gap: 30px; align-items: center; }
+  .menu a {
+    font-size: 15px;
+    color: var(--ink);
+    position: relative;
+    padding: 4px 0;
+  }
+  .menu a.active { color: var(--ink); }
+  .menu a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 20%;
+    right: 20%;
+    height: 1.5px;
+    background: var(--accent);
+  }
+  .logo {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 700;
+    letter-spacing: .12em;
+    font-size: 24px;
+    line-height: 1;
+    text-align: center;
+  }
+  .logo small {
+    display: block;
+    font-size: 10px;
+    letter-spacing: .35em;
+    font-weight: 400;
+    margin-top: 4px;
+    color: var(--ink-2);
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 60px;
+    align-items: center;
+    padding: 50px 0 70px;
+  }
+  .hero h1 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 500;
+    font-size: 64px;
+    line-height: 1.08;
+    letter-spacing: -.01em;
+    margin: 0 0 28px;
+    color: var(--ink);
+  }
+  .hero h1 .accent { color: var(--accent); }
+  .hero p.lead {
+    font-size: 17px;
+    color: var(--ink-2);
+    line-height: 1.7;
+    margin: 0 0 36px;
+    max-width: 460px;
+  }
+  .hero .ctas { display: flex; gap: 14px; margin-bottom: 22px; }
+  .hero .note {
+    font-size: 13px;
+    color: var(--ink-3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hero .note svg { flex-shrink: 0; }
+
+  .hero-visual {
+    position: relative;
+    aspect-ratio: 4/3;
+    background: linear-gradient(180deg, #f4eee0 0%, #ebe2cd 100%);
+    border-radius: 14px;
+    box-shadow: 0 30px 60px -30px rgba(80, 60, 30, .25), 0 4px 14px rgba(80,60,30,.06);
+    padding: 36px 28px 28px;
+    overflow: hidden;
+  }
+  .hero-visual .mvp-title {
+    text-align: center;
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 500;
+    letter-spacing: .18em;
+    font-size: 22px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .hero-visual .mvp-sub {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: .25em;
+    color: var(--ink-3);
+    margin-bottom: 28px;
+  }
+  .hero-visual .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    direction: ltr;
+  }
+  .mini-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 14px 12px 10px;
+    aspect-ratio: 1.2/1;
+    box-shadow: 0 2px 8px rgba(80,60,30,.08);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .mini-card .mc-label {
+    font-size: 9px;
+    letter-spacing: .22em;
+    color: var(--ink-3);
+    font-weight: 500;
+  }
+  .mini-card .mc-label b { color: var(--ink-2); margin-left: 4px; }
+  .mini-card .mc-art {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-3);
+    opacity: .8;
+  }
+  .hero-device {
+    position: absolute;
+    left: 50%;
+    top: 48%;
+    transform: translate(-50%, -50%);
+    width: 110px;
+    height: 200px;
+    background: linear-gradient(180deg, #fafafa 0%, #e4e1da 100%);
+    border-radius: 60px 60px 50% 50% / 70px 70px 30% 30%;
+    box-shadow: 0 12px 30px rgba(0,0,0,.18);
+    pointer-events: none;
+  }
+  .hero-device::before {
+    content: '';
+    position: absolute;
+    inset: 12px 12px 80px;
+    background: radial-gradient(ellipse at top, #c8c4ba 0%, #efece4 60%);
+    border-radius: 50% 50% 45% 45%;
+  }
+  .hero-device::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 30px;
+    background: #555;
+    border-radius: 0 0 8px 8px;
+  }
+
+  /* ===== STRIP — Smart stage ===== */
+  .strip {
+    background: #faf6ec;
+    border-top: 1px solid var(--line-2);
+    border-bottom: 1px solid var(--line-2);
+    padding: 44px 0 52px;
+  }
+  .strip-title {
+    text-align: center;
+    font-size: 18px;
+    color: var(--ink-2);
+    margin-bottom: 30px;
+    font-weight: 400;
+  }
+  .strip-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px;
+  }
+  .strip-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    text-align: center;
+  }
+  .strip-item .ico {
+    width: 38px; height: 38px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink-2);
+  }
+  .strip-item .lbl {
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+
+  /* ===== SECTION SHELL ===== */
+  section.panel { padding: 80px 0 20px; }
+  .panel-card {
+    background: var(--card);
+    border: 1px solid var(--line-2);
+    border-radius: 8px;
+    padding: 56px 48px;
+    margin-bottom: 22px;
+  }
+  .section-title {
+    text-align: center;
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 500;
+    font-size: 38px;
+    color: var(--ink);
+    margin: 0 0 44px;
+    letter-spacing: -.005em;
+  }
+
+  /* ===== What we do — 4 numbered ===== */
+  .what-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .what-card {
+    background: var(--card-2);
+    border: 1px solid var(--line-2);
+    border-radius: 6px;
+    padding: 28px 22px 24px;
+    position: relative;
+    min-height: 200px;
+  }
+  .what-card .num {
+    position: absolute;
+    top: 22px;
+    left: 22px;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 600;
+  }
+  .what-card .ic {
+    margin-bottom: 18px;
+    color: var(--ink-2);
+  }
+  .what-card h4 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 500;
+    font-size: 19px;
+    margin: 0 0 8px;
+  }
+  .what-card p {
+    font-size: 13.5px;
+    color: var(--ink-2);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* ===== How it works — flow ===== */
+  .flow {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0;
+    align-items: start;
+    margin-top: 20px;
+  }
+  .flow-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+  }
+  .flow-step .circ {
+    width: 70px; height: 70px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink-2);
+  }
+  .flow-step .lbl {
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .flow-step::before {
+    content: '';
+    position: absolute;
+    top: 35px;
+    right: -50%;
+    width: 100%;
+    height: 1px;
+    background: var(--line);
+    z-index: 0;
+  }
+  .flow-step:last-child::before { display: none; }
+  .flow-step .arrow-mark {
+    position: absolute;
+    top: 28px;
+    right: calc(-50% - 6px);
+    background: var(--bg);
+    padding: 0 6px;
+    color: var(--accent);
+    font-size: 12px;
+    z-index: 1;
+  }
+  .flow-step:last-child .arrow-mark { display: none; }
+  .flow-step .circ { position: relative; z-index: 2; }
+
+  /* ===== What you get — 3 cards ===== */
+  .benefits {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+    padding: 10px 30px 0;
+  }
+  .benefit {
+    text-align: center;
+  }
+  .benefit .ic {
+    width: 56px; height: 56px;
+    margin: 0 auto 14px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink-2);
+  }
+  .benefit h4 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 500;
+    font-size: 20px;
+    margin: 0 0 10px;
+  }
+  .benefit p {
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.7;
+    margin: 0;
+    max-width: 280px;
+    margin-inline: auto;
+  }
+
+  /* ===== Examples ===== */
+  .examples {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  .example {
+    background: var(--card-2);
+    border: 1px solid var(--line-2);
+    border-radius: 8px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 130px 1fr;
+  }
+  .example .ex-img {
+    background: linear-gradient(180deg, #f0eadb 0%, #e3d9c2 100%);
+    display: flex; align-items: center; justify-content: center;
+    padding: 18px 10px;
+  }
+  .example .ex-body {
+    padding: 22px 20px 18px;
+  }
+  .example .ex-tag {
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: .08em;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .example h4 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 500;
+    font-size: 18px;
+    margin: 0 0 8px;
+  }
+  .example p {
+    font-size: 13px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    margin: 0 0 14px;
+  }
+  .example .ex-link {
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .ex-product {
+    width: 100%;
+    height: 100%;
+    min-height: 130px;
+    border-radius: 6px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  /* ===== About ===== */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+  }
+  .about-left {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+  .portrait {
+    width: 150px;
+    height: 180px;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #d5cbb4;
+  }
+  .about h3 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 26px;
+    font-weight: 500;
+    margin: 4px 0 4px;
+  }
+  .about .role {
+    font-size: 14px;
+    color: var(--ink-2);
+    margin-bottom: 14px;
+  }
+  .about p.bio {
+    font-size: 13.5px;
+    color: var(--ink-2);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    text-align: center;
+  }
+  .stat .ic {
+    width: 44px; height: 44px;
+    margin: 0 auto 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink-2);
+  }
+  .stat .num {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .stat .stat-label {
+    font-size: 13px;
+    color: var(--ink-2);
+    margin-top: 4px;
+  }
+  .stat .lbl-strong {
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  /* ===== Pricing ===== */
+  .pricing {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) 1.05fr;
+    gap: 18px;
+    align-items: stretch;
+  }
+  .price-card {
+    background: var(--card-2);
+    border: 1px solid var(--line-2);
+    border-radius: 8px;
+    padding: 30px 24px 26px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .price-card.featured {
+    border-color: var(--accent);
+    border-width: 1.5px;
+  }
+  .price-card .badge {
+    position: absolute;
+    top: -12px;
+    right: 50%;
+    transform: translateX(50%);
+    background: var(--accent);
+    color: #fff;
+    font-size: 12px;
+    padding: 5px 14px;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+  .price-card h4 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 500;
+    font-size: 21px;
+    margin: 0 0 12px;
+  }
+  .price-card p {
+    font-size: 13px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    margin: 0 0 24px;
+    flex: 1;
+  }
+  .price-card .price-block {
+    border-top: 1px solid var(--line-2);
+    padding-top: 18px;
+  }
+  .price-card .from {
+    font-size: 13px;
+    color: var(--ink-3);
+    text-align: center;
+    margin-bottom: 6px;
+  }
+  .price-card .amount {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 32px;
+    font-weight: 500;
+    text-align: center;
+    color: var(--ink);
+  }
+  .price-includes {
+    background: var(--card-2);
+    border: 1px solid var(--line-2);
+    border-radius: 8px;
+    padding: 26px 24px;
+  }
+  .price-includes ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .price-includes li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    color: var(--ink);
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line-2);
+  }
+  .price-includes li:last-child { border-bottom: 0; padding-bottom: 0; }
+  .price-includes .chk { color: var(--accent); font-size: 16px; }
+
+  .pricing-disclaimer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--ink-3);
+    margin-top: 22px;
+  }
+
+  /* ===== Lead form ===== */
+  .lead-form .form-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .lead-form input {
+    background: #fff;
+    border: 1px solid var(--line-2);
+    border-radius: 4px;
+    padding: 13px 14px;
+    font-size: 14px;
+    font-family: inherit;
+    text-align: right;
+    color: var(--ink);
+  }
+  .lead-form input::placeholder { color: var(--ink-3); }
+  .lead-form input:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
+  .lead-form .form-head {
+    text-align: center;
+  }
+  .lead-form .form-head h3 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 500;
+    font-size: 28px;
+    margin: 0 0 10px;
+  }
+  .lead-form .form-head p {
+    font-size: 14px;
+    color: var(--ink-2);
+    margin: 0;
+  }
+  .lead-form .form-cta {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  /* ===== Footer ===== */
+  footer {
+    padding: 26px 0 32px;
+    border-top: 1px solid var(--line-2);
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  footer .foot-right { display: flex; gap: 24px; }
+  footer .socials { display: flex; gap: 12px; }
+  footer .socials a {
+    width: 26px; height: 26px;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--ink-2);
+  }
+
+  /* ===== image-slot defaults ===== */
+  image-slot {
+    background: rgba(255,255,255,.4);
+    border: 1px dashed var(--line);
+    color: var(--ink-3);
+    font-size: 11px;
+  }
+</style>
+</head>
+<body style="background-color: rgb(255, 255, 255)">
+
+<div class="wrap">
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-left">
+      <button class="btn btn-primary"><span class="arrow">←</span>בדיקת התאמה ראשונית</button>
+    </div>
+    <div class="menu">
+      <a href="#faq">שאלות נפוצות</a>
+      <a href="#about">אודות</a>
+      <a href="#examples">דוגמאות</a>
+      <a href="#what">מה מקבלים</a>
+      <a href="#how">איך זה עובד</a>
+      <a href="#home" class="active">בית</a>
+    </div>
+    <div class="logo">KYD<small>STUDIO</small></div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <h1>מרעיון לא ברור<br>לקונספט שאפשר <span class="accent">להציג.</span></h1>
+      <p class="lead">אנחנו עוזרים ליזמים, ממציאים ושותפים מקצועיים להפוך רעיון גולמי למצגת Concept MVP ברורה: אפיון, מחקר, הדמיות וסיפור מוצר.</p>
+      <div class="ctas">
+        <button class="btn btn-primary"><span class="arrow">←</span>בדיקת התאמה ראשונית</button>
+        <button class="btn btn-ghost">לראות מה מקבלים <span class="arrow">›</span></button>
+      </div>
+      <div class="note">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+        המידע שלך נשמר בצורה מאובטחת ודיסקרטית.
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="mvp-title">CONCEPT MVP</div>
+      <div class="mvp-sub">Smart. Simple. Solves.</div>
+      <div class="cards-grid">
+        <div class="mini-card"><div class="mc-label"><b>01</b>PROBLEM</div><div class="mc-art">
+          <svg width="50" height="50" viewBox="0 0 64 64" fill="none" stroke="#9a8c75" stroke-width="1.2"><circle cx="22" cy="22" r="6"/><path d="M22 28v18"/><path d="M14 46h16"/><path d="M40 22c2-4 8-4 10 0s-2 6-5 8v4"/><circle cx="45" cy="42" r="1" fill="#9a8c75"/></svg>
+        </div></div>
+        <div class="mini-card"><div class="mc-label"><b>02</b>PRODUCT</div><div class="mc-art">
+          <svg width="36" height="50" viewBox="0 0 36 50" fill="none" stroke="#9a8c75" stroke-width="1.2"><ellipse cx="18" cy="14" rx="12" ry="10"/><ellipse cx="18" cy="14" rx="6" ry="5"/><path d="M14 24v18a4 4 0 0 0 8 0V24"/></svg>
+        </div></div>
+        <div class="mini-card"><div class="mc-label"><b>03</b>USER</div><div class="mc-art">
+          <svg width="50" height="50" viewBox="0 0 64 64" fill="none" stroke="#9a8c75" stroke-width="1.2"><circle cx="28" cy="20" r="6"/><path d="M28 28v16"/><path d="M20 44h16"/><circle cx="48" cy="22" r="4"/><path d="M44 32l4-4 4 4"/></svg>
+        </div></div>
+        <div class="mini-card"><div class="mc-label"><b>04</b>SCENARIO</div><div class="mc-art">
+          <svg width="50" height="50" viewBox="0 0 64 64" fill="none" stroke="#9a8c75" stroke-width="1.2"><path d="M16 40c0-10 10-18 20-14"/><circle cx="38" cy="28" r="3"/><path d="M22 42l-4 8 8-2"/><rect x="32" y="42" width="14" height="10" rx="2"/></svg>
+        </div></div>
+        <div class="mini-card"><div class="mc-label"><b>05</b>PITCH</div><div class="mc-art">
+          <svg width="50" height="50" viewBox="0 0 64 64" fill="none" stroke="#9a8c75" stroke-width="1.2"><path d="M10 50h44"/><path d="M14 50V34"/><path d="M26 50V24"/><path d="M38 50V30"/><path d="M50 50V18"/><path d="M14 34l12-10 12 6 12-12"/></svg>
+        </div></div>
+        <div class="mini-card" style="background:transparent;box-shadow:none;border:none;"></div>
+      </div>
+      <div class="hero-device"></div>
+    </div>
+  </section>
+
+</div>
+
+<!-- STRIP -->
+<section class="strip" style="background-color: rgb(255, 255, 255)">
+  <div class="wrap">
+    <div class="strip-title">השלב החכם לפני פטנט, אבטיפוס, פיתוח או פגישה עם משקיע.</div>
+    <div class="strip-row">
+      <div class="strip-item">
+        <div class="ico"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="17" cy="11" r="4"/><path d="M9 28v-3a8 8 0 0 1 16 0v3"/></svg></div>
+        <div class="lbl">יזמים פרטיים</div>
+      </div>
+      <div class="strip-item">
+        <div class="ico"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M17 4v8"/><circle cx="17" cy="17" r="5"/><path d="M11 28v-3"/><path d="M23 28v-3"/></svg></div>
+        <div class="lbl">ממציאים</div>
+      </div>
+      <div class="strip-item">
+        <div class="ico"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M17 4c4 4 6 8 6 13s-2 9-6 13c-4-4-6-8-6-13s2-9 6-13z"/><circle cx="17" cy="14" r="2"/><path d="M11 24l-4 4M23 24l4 4"/></svg></div>
+        <div class="lbl">סטארטאפים מוקדמים</div>
+      </div>
+      <div class="strip-item">
+        <div class="ico"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M17 4c-4 0-7 3-7 7 0 4 3 5 3 9h8c0-4 3-5 3-9 0-4-3-7-7-7z"/><path d="M13 24h8M14 28h6"/></svg></div>
+        <div class="lbl">ממציאים</div>
+      </div>
+      <div class="strip-item">
+        <div class="ico"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="6" y="8" width="14" height="20"/><path d="M20 14h8v14h-8"/><path d="M10 12h6M10 16h6M10 20h6M22 18h4M22 22h4"/></svg></div>
+        <div class="lbl">משרדי פטנטים / הנדסה</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <!-- WHAT WE DO -->
+  <section class="panel" id="what" style="padding: 56px 0px 20px">
+    <div class="panel-card" style="background-color: rgb(255, 255, 255)">
+      <h2 class="section-title">מה אנחנו עושים</h2>
+      <div class="what-grid">
+        <!-- numbered 4,3,2,1 from right to left (visual: 1 first on right) -->
+        <div class="what-card">
+          <span class="num">4</span>
+          <div class="ic"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="17" cy="17" r="11"/><circle cx="17" cy="17" r="6"/><circle cx="17" cy="17" r="1.5" fill="currentColor"/><path d="M17 3v4M17 27v4M3 17h4M27 17h4"/></svg></div>
+          <h4>ממפים שווה מ-רעיוני.</h4>
+          <p>מגדירים בצוע, קהל יעד, שימוש. ערך גבולות.</p>
+        </div>
+        <div class="what-card">
+          <span class="num">3</span>
+          <div class="ic"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="14" cy="14" r="8"/><path d="M20 20l7 7"/></svg></div>
+          <h4>בודקים את הסביבה</h4>
+          <p>מחקר מתחרים, השראות ובידול ראשוני.</p>
+        </div>
+        <div class="what-card">
+          <span class="num">2</span>
+          <div class="ic"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M17 4l11 6v14l-11 6-11-6V10z"/><path d="M6 10l11 6 11-6M17 16v14"/></svg></div>
+          <h4>ממחישים את הפתרון</h4>
+          <p>הדמיות ויאליסטיות, תרחישי שימוש ומבנה מוצר.</p>
+        </div>
+        <div class="what-card">
+          <span class="num">1</span>
+          <div class="ic"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="4" y="6" width="26" height="18" rx="1"/><path d="M10 28h14M17 24v4"/><path d="M9 12h16M9 16h10M9 20h12"/></svg></div>
+          <h4>מפרקים את הרעיון</h4>
+          <p>מגדירים בעיה, קהל לשלות, להציג ולקבל פידבק.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="panel" id="how" style="padding: 20px 0px">
+    <div class="panel-card" style="background-color: rgb(255, 255, 255)">
+      <h2 class="section-title">איך זה עובד</h2>
+      <div class="flow">
+        <div class="flow-step">
+          <div class="circ"><svg width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="6" y="4" width="18" height="22" rx="1"/><path d="M11 2h8v4h-8z"/><path d="M10 12h10M10 16h10M10 20h7"/></svg></div>
+          <div class="lbl">מצגת</div>
+          <span class="arrow-mark">›</span>
+        </div>
+        <div class="flow-step">
+          <div class="circ"><svg width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="6" width="24" height="18" rx="1"/><circle cx="10" cy="13" r="2"/><path d="M3 22l8-7 6 5 4-3 6 5"/></svg></div>
+          <div class="lbl">הדמיות</div>
+          <span class="arrow-mark">›</span>
+        </div>
+        <div class="flow-step">
+          <div class="circ"><svg width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M15 4l11 6v10l-11 6-11-6V10z"/></svg></div>
+          <div class="lbl">קונספט</div>
+          <span class="arrow-mark">›</span>
+        </div>
+        <div class="flow-step">
+          <div class="circ"><svg width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="13" cy="13" r="8"/><path d="M19 19l7 7"/></svg></div>
+          <div class="lbl">מחקר</div>
+          <span class="arrow-mark">›</span>
+        </div>
+        <div class="flow-step">
+          <div class="circ"><svg width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="4" y="6" width="22" height="18" rx="1"/><path d="M9 12h12M9 16h12M9 20h8"/></svg></div>
+          <div class="lbl">אפיון</div>
+          <span class="arrow-mark">›</span>
+        </div>
+        <div class="flow-step">
+          <div class="circ"><svg width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="6" y="4" width="18" height="22" rx="1"/><path d="M10 11h10M10 15h10M10 19h7"/></svg></div>
+          <div class="lbl">ראיון</div>
+          <span class="arrow-mark">›</span>
+        </div>
+        <div class="flow-step">
+          <div class="circ"><svg width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M15 4c-4 0-7 3-7 7 0 4 3 5 3 9h8c0-4 3-5 3-9 0-4-3-7-7-7z"/><path d="M11 24h8M12 28h6"/></svg></div>
+          <div class="lbl">רעיון</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section class="panel">
+    <div class="panel-card" style="background-color: rgb(255, 255, 255)">
+      <h2 class="section-title">מה יוצא לך מזה?</h2>
+      <div class="benefits">
+        <div class="benefit">
+          <div class="ic"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 36h28"/><path d="M12 36V20"/><path d="M22 36V12"/><path d="M32 36V24"/><path d="M12 20l10-8 10 4"/><path d="M28 14l4-2 2 4"/></svg></div>
+          <h4>התקדמות</h4>
+          <p>יהיה לך קובץ שמשתפ יכול לשתפר, לבדוק ולקבל פידבק.</p>
+        </div>
+        <div class="benefit">
+          <div class="ic"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M22 6l13 4v10c0 8-6 14-13 18-7-4-13-10-13-18V10z"/></svg></div>
+          <h4>ביטחון</h4>
+          <p>תדע להסביר את הרעיון בצורה מקצועית ומשכנעת.</p>
+        </div>
+        <div class="benefit">
+          <div class="ic"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="22" cy="22" r="8"/><path d="M22 4v6M22 34v6M4 22h6M34 22h6M9 9l4 4M31 31l4 4M9 35l4-4M31 13l4-4"/></svg></div>
+          <h4>בהירות</h4>
+          <p>תבין מה בדיוק יש לך ביד ואיך המוצר שלך פותר בעיה.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXAMPLES -->
+  <section class="panel" id="examples">
+    <div class="panel-card" style="background-color: rgb(255, 255, 255)">
+      <h2 class="section-title">דוגמאות מהשטח</h2>
+      <div class="examples">
+        <div class="example">
+          <div class="ex-img">
+            <image-slot id="ex1" shape="rounded" radius="6" placeholder="מכשיר ניטור" style="width:100%;height:130px;"></image-slot>
+          </div>
+          <div class="ex-body">
+            <div class="ex-tag">מוצר רפואי</div>
+            <h4>מכשיר ניטור ביתי</h4>
+            <p>מתהליך רעיון עמום לקונספט ברור עם תרחישי שימוש והצגה ערוכה למשקיעים.</p>
+            <div class="ex-link">לצפייה בדוגמה ›</div>
+          </div>
+        </div>
+        <div class="example">
+          <div class="ex-img">
+            <image-slot id="ex2" shape="rounded" radius="6" placeholder="מערכת חכמה" style="width:100%;height:130px;"></image-slot>
+          </div>
+          <div class="ex-body">
+            <div class="ex-tag">טכנולוגיה / IoT</div>
+            <h4>מערכת חכמה לבית</h4>
+            <p>אפיון, גילוי קהל מתאחרים והדמיות שמסבירות את חוויית השימוש.</p>
+            <div class="ex-link">לצפייה בדוגמה ›</div>
+          </div>
+        </div>
+        <div class="example">
+          <div class="ex-img">
+            <image-slot id="ex3" shape="rounded" radius="6" placeholder="אביזר" style="width:100%;height:130px;"></image-slot>
+          </div>
+          <div class="ex-body">
+            <div class="ex-tag">מוצר צרכני</div>
+            <h4>אביזר יומיומי</h4>
+            <p>פיתוח טוויה פשוטה והפיכתה למוצר חכם עם סיפור ברור והדמיות משכנעות.</p>
+            <div class="ex-link">לצפייה בדוגמה ›</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="panel" id="about">
+    <div class="panel-card" style="background-color: rgb(255, 255, 255)">
+      <div class="about">
+        <div class="about-left">
+          <div class="portrait">
+            <image-slot id="portrait" shape="rect" placeholder="תמונת מייסד" style="width:150px;height:180px;"></image-slot>
+          </div>
+          <div>
+            <h3>KYD Studio</h3>
+            <div class="role">בהובלת יוגב קרסנטי</div>
+            <p class="bio">מעצב מוצר מתמחה לאסטרטגיית ועיצוב. מעל 10 שנות ניסיון בפיתוח קונספטים והנגשת רעיונות למוצרים פיזיים ודיגיטליים. ליווי אישי, חשיבה מוצרית ודיוק מסרים.</p>
+          </div>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <div class="ic"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="22" cy="18" r="10"/><path d="M22 18l-3-3M22 18l3 3"/><path d="M14 28l-3 12 11-5 11 5-3-12"/></svg></div>
+            <div class="num">200+</div>
+            <div class="stat-label">מצגות קונספט<br>שהוכנו ברצינות</div>
+          </div>
+          <div class="stat">
+            <div class="ic"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M22 6l5 10 11 1-8 8 2 11-10-5-10 5 2-11-8-8 11-1z"/></svg></div>
+            <div class="num">10+</div>
+            <div class="stat-label">שנות ניסיון<br>בעיצוב ופיתוח</div>
+          </div>
+          <div class="stat">
+            <div class="ic"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="22" cy="16" r="6"/><path d="M10 36v-2a12 12 0 0 1 24 0v2"/></svg></div>
+            <div class="lbl-strong">עיצוב מוצרי</div>
+            <div class="stat-label">עיצוב תעשייתי, UX.<br>הדמיות וסיפור מוצר.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="panel">
+    <div class="panel-card">
+      <h2 class="section-title">חבילות מומלצות</h2>
+      <div class="pricing">
+        <div class="price-card">
+          <h4>Investor / Partner Pack</h4>
+          <p>התאמת המצגת למשקיע, שותף או פגישה עסקית.</p>
+          <div class="price-block">
+            <div class="from">החל מ-</div>
+            <div class="amount">₪7,900</div>
+          </div>
+        </div>
+        <div class="price-card featured">
+          <span class="badge">הכי פופולרי</span>
+          <h4>Concept Development</h4>
+          <p>תהליך עומק רחב: אפיון, מחקר, הדמיות מפורטות ומצגת מלאה.</p>
+          <div class="price-block">
+            <div class="from">החל מ-</div>
+            <div class="amount">₪5,900</div>
+          </div>
+        </div>
+        <div class="price-card">
+          <h4>Concept MVP Sprint</h4>
+          <p>תהליך ממוקד להמחשת הרעיון וקבלת פידבק ראשוני.</p>
+          <div class="price-block">
+            <div class="from">החל מ-</div>
+            <div class="amount">₪3,500</div>
+          </div>
+        </div>
+        <div class="price-includes">
+          <ul>
+            <li><span>תהליך מובנה ומדויק</span><span class="chk">✓</span></li>
+            <li><span>יחס אישי וצמוד</span><span class="chk">✓</span></li>
+            <li><span>דיסקרטיות מלאה</span><span class="chk">✓</span></li>
+            <li><span>חשיבה אסטרטגית + עיצוב</span><span class="chk">✓</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="pricing-disclaimer">המחירים אינם סופיים מע"מ. כל הצעה מותאמת לצרכים הספציפיים שלך.</div>
+    </div>
+  </section>
+
+  <!-- LEAD FORM -->
+  <section class="panel" id="faq">
+    <div class="panel-card lead-form">
+      <div class="form-head">
+        <h3>יש לך הרעיון למוצר? בוא נבדוק איך אפשר להפוך אותו לקונספט מנצח.</h3>
+        <p>מלא פרטים וקבל בדיקת התאמה ראשונית – ללא התחייבות.</p>
+      </div>
+      <div class="form-row">
+        <input type="text" placeholder="שם מלא">
+        <input type="tel" placeholder="טלפון">
+        <input type="text" placeholder="עניין">
+        <input type="email" placeholder="אימייל">
+      </div>
+      <div class="form-cta">
+        <button class="btn btn-primary"><span class="arrow">←</span>בדיקת התאמה ראשונית</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>KYD STUDIO © כל הזכויות שמורות</div>
+    <div class="foot-right">
+      <a href="#">תנאי שימוש</a>
+      <a href="#">מדיניות פרטיות</a>
+      <a href="#">הצהרת נגישות</a>
+      <div class="socials">
+        <a href="#" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h4v16H4zM6 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM10 8h4v2c1-2 3-2 4-2 3 0 4 2 4 5v7h-4v-7c0-1-1-2-2-2s-2 1-2 2v7h-4z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1" fill="currentColor"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>
