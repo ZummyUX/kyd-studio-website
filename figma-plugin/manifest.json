@@ -1,0 +1,7 @@
+{
+  "name": "KYD Studio — Generate Design",
+  "id": "kyd-studio-generator",
+  "api": "1.0.0",
+  "main": "code.js",
+  "editorType": ["figma"]
+}
